@@ -17,7 +17,7 @@ VideoplazaJS is a wrapper library for the Videoplaza Flash SDK, designed to make
 The project requires jQuery and SWFObject to run, so bootstrapping the code requires a few lines of code:
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="bin-debug/swfobject.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
     <script type="text/javascript" src="videoplaza.js"></script>
     <div id="vpcontainer"></div>
     <script>
