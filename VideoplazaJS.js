@@ -35,7 +35,6 @@ var VideoplazaJS = (function(jQuery, window){
     $this.setPlaying = function(playing){
     }
     $this.update = function(event, playing, position, duration, volume){
-      console.debug('update');
       $this.config.playing = playing;
       $this.config.position = position;
       $this.config.duration = duration;
@@ -43,7 +42,7 @@ var VideoplazaJS = (function(jQuery, window){
       $this.flash.receiveEvent(event, $this.config);
     }
     window.VideoplazaJSEvent = function(event, context){
-      console.debug('VideoplazaJS', 'Event', event, context);
+      ////console.debug('VideoplazaJS', 'Event', event, context);
       switch(event) {
       case 'videoplazaReady':
         $this.available = true;
@@ -59,11 +58,11 @@ var VideoplazaJS = (function(jQuery, window){
       }
     }
     window.VideoplazaJSCallback = function(method, value){
-      console.debug('VideoplazaJS', 'Run', method + '(' + value + ')');
+      ////console.debug('VideoplazaJS', 'Run', method + '(' + value + ')');
       $this[method](value);
     }
     $this.loadFlash = function(){
-      //$this.callback(false); return;    // uncomment to test fallback
+      ////$this.callback(false); return;    // uncomment to test fallback
 
       swfobject.embedSWF($this.config.swfFile, $this.config.container,  '100%', '10%', '10.1.0', '', {}, {allowscriptaccess:'always', allowfullscreen:'true', wmode:'transparent'}, {id:'VideoplazaJS', name:'VideoplazaJS'}, function(success, id, ref) {
         if(!success) $this.callback(false);
