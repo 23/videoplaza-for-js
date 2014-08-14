@@ -18,7 +18,7 @@ The project requires jQuery and SWFObject to run, so bootstrapping the code requ
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-    <script type="text/javascript" src="videoplaza.js"></script>
+    <script type="text/javascript" src="VideoplazaJS.js"></script>
     <div id="vpcontainer"></div>
     <script>
       var vp = new VideoplazaJS(function(available){
