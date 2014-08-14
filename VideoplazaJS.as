@@ -33,6 +33,7 @@ package  {
     }
     
     private function log(s:String):void {
+      if(!flash.system.Capabilities.isDebugger) return;
       trace(s);
       try {
 	ExternalInterface.call("console.log", "VideoplazaJS", s);
@@ -47,6 +48,9 @@ package  {
 	log('Loaded ExternalInterface');
 	sendEvent('flashloaded');
       }
+      stage.addEventListener(Event.RESIZE, function(e:Event):void{
+        _vpAdPlayer.setPlayerState(PlayerState.RESIZE);
+      });
     }
     
     public function init(info:Object):void {
@@ -65,7 +69,7 @@ package  {
       videoPlayerInfo = info; 
       switch(event) {
       case 'new':
-        _startNewAdSection = true;
+        setNewItem();
         break;
       case 'play':
 	if (_startNewAdSection) { 
@@ -141,7 +145,6 @@ package  {
      */
     public function setNewItem(media:Object=null):void {
       var videoplazaConfig:Object = videoPlayerInfo;
-      
       var itemInfo:ItemInfo = new ItemInfo();
       itemInfo.category = (videoplazaConfig.vpcategory) ? videoplazaConfig.vpcategory : '';
       itemInfo.tags = (videoplazaConfig.vptags) ? videoplazaConfig.vptags.split(',') : [];
@@ -149,8 +152,6 @@ package  {
       itemInfo.contentForm = (videoplazaConfig.contentForm) ? videoplazaConfig.contentForm : '';
       itemInfo.contentId = (videoplazaConfig.contentId) ? videoplazaConfig.contentId : '';
       itemInfo.contentPartner = (videoplazaConfig.contentPartner) ? videoplazaConfig.contentPartner : '';
-      
-      //cuepoints must be formated as {name:'vpspot', time:10}
       if (videoplazaConfig.cuepoints) {
 	var cuePointMarkers:Array = videoplazaConfig.cuepoints.split(",");
 	var formatedMarkers:Array = [];
@@ -159,7 +160,6 @@ package  {
 	}
 	itemInfo.cuePoints = formatedMarkers;
       }
-      
       _vpAdPlayer.setNewItem(itemInfo);
     }
     

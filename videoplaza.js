@@ -65,7 +65,7 @@ var VideoplazaJS = (function(jQuery, window){
     $this.loadFlash = function(){
       //$this.callback(false); return;    // uncomment to test fallback
 
-      swfobject.embedSWF($this.config.swfFile, $this.config.container,  '100%', '100%', '10.1.0', '', {}, {allowscriptaccess:'always', allowfullscreen:'true', wmode:'transparent'}, {id:'VideoplazaJS', name:'VideoplazaJS'}, function(success, id, ref) {
+      swfobject.embedSWF($this.config.swfFile, $this.config.container,  '100%', '10%', '10.1.0', '', {}, {allowscriptaccess:'always', allowfullscreen:'true', wmode:'transparent'}, {id:'VideoplazaJS', name:'VideoplazaJS'}, function(success, id, ref) {
         if(!success) $this.callback(false);
       });
     };
