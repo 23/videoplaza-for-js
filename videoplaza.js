@@ -7,9 +7,12 @@ TODO:
 var VideoplazaJS = (function(jQuery, window){
   return function(callback, config){
     $this = this;
+    $this.available = false;
     $this.callback = callback||function(){};
     $this.config = $.extend({
       container:'vpcontainer',
+      swfFile:'VideoplazaJS.swf',
+      autoPlay: false,
       playing:false,
       volume:1,
       position:0,
@@ -21,7 +24,7 @@ var VideoplazaJS = (function(jQuery, window){
       contentForm: '',
       contentId: '',
       contentPartner: '',			
-      cuePoints:''
+      cuePoints:'',
     }, config||{});
     $this.flash = null;
 
@@ -43,6 +46,7 @@ var VideoplazaJS = (function(jQuery, window){
       console.debug('VideoplazaJS', 'Event', event, context);
       switch(event) {
       case 'videoplazaReady':
+        $this.available = true;
         $this.callback(true);
         break;
       case 'videoplazaFail':
@@ -59,10 +63,15 @@ var VideoplazaJS = (function(jQuery, window){
       $this[method](value);
     }
     $this.loadFlash = function(){
-      console.debug('embed');
-      swfobject.embedSWF("VideoplazaJS.swf", $this.config.container,  '100%', '100%', '10.1.0', '', {}, {allowscriptaccess:'always', allowfullscreen:'true', wmode:'opaque', bgcolor:'#000000'}, {id:'VideoplazaJS', name:'VideoplazaJS'});
+      //$this.callback(false); return;    // uncomment to test fallback
+
+      swfobject.embedSWF($this.config.swfFile, $this.config.container,  '100%', '100%', '10.1.0', '', {}, {allowscriptaccess:'always', allowfullscreen:'true', wmode:'transparent'}, {id:'VideoplazaJS', name:'VideoplazaJS'}, function(success, id, ref) {
+        if(!success) $this.callback(false);
+      });
     };
-    $this.loadFlash();
+    $this.loadFlash();    
     return $this;
   }
 })(jQuery, window);
+
+if(window.VideoplazaJSLibraryAvailable) window.VideoplazaJSLibraryAvailable();

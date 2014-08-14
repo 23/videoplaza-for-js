@@ -37,7 +37,8 @@ VideoplazaJS forwards a number of parameters to Videoplaza, specifically these a
     contentForm = ''
     contentId = ''
     contentPartner = ''
-    cuePoints:''
+    cuePoints = ''
+    autoPlay = false
 
 Each can be set during load:
 
@@ -68,14 +69,11 @@ The `event` parameter can be any of these strings:
 
     play
     pause
-    stop
-    end
-    mute
-    unmute
     volumechange
     timeupdate
     durationchange
     complete
+    new
 
 
 
