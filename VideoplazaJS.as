@@ -48,9 +48,11 @@ package  {
 	log('Loaded ExternalInterface');
 	sendEvent('flashloaded');
       }
-      stage.addEventListener(Event.RESIZE, function(e:Event):void{
-        _vpAdPlayer.setPlayerState(PlayerState.RESIZE);
-      });
+      var updateSize:Function = function():void{
+        _vpAdPlayer.setSize(getScreenWidth(), getScreenHeight(), 'ViewMode.NORMAL')
+      }
+      stage.addEventListener(Event.RESIZE, function(e:Event):void{updateSize();});
+      updateSize();
     }
     
     public function init(info:Object):void {
@@ -112,7 +114,7 @@ package  {
      * FAIL: Start the videoplayer without videoplaza plugin
      */
     public function videoplazaLoadedFail(errorMessage:String):void {
-      trace(errorMessage);
+      log(errorMessage);
       sendEvent('videoplazaFail', errorMessage);
     }
     
