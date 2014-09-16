@@ -41,6 +41,9 @@ package  {
     }
 
     public function VideoplazaJS():void {
+      stage.scaleMode = 'noScale'; //StageScaleMode.NO_SCALE
+      stage.align = 'TL'; //StageAlign.TOP_LEFT;
+
       Security.allowDomain('*');
       if (ExternalInterface.available) {
 	ExternalInterface.addCallback("receiveEvent", receiveEvent);
